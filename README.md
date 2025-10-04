@@ -81,29 +81,28 @@ The primary objective of this dashboard is to provide users with an interactive 
 **3. A Walkthrough of Key Visuals:**
 
 **1. Text Box (top):**
-The text box displays the title of the Dashboard, ***Energy Consumption Dashboard***.
+The text box displays the title of the Dashboard, ***Insigh BI Solutions Private Limited***.
 
-**2. KWH by Country (Bar Chart) (Left Corner):**
-This visually engaging bar chart illustrates the electric consumption in kilowatt-hours (KWH) across various countries. Australia leads the pack with an impressive usage of 80,410 KWH, highlighting its high energy demands. In contrast, Chile registers the lowest energy consumption among the listed countries, with a modest usage of 16,556 KWH, reflecting its comparatively lower energy requirements.
+**2. Top 5 brands by average of discount % (Bar Chart) (top Left Corner):**
+This visually engaging bar chart illustrates the average of discount % of top 5 brands. Where The Indian Garage Co tops the chart with 72 average of discount %. In contrast, Netplay registers the lowest among the top 5 with 32 average of discount %. However the average of discount % of all the 5 brands lies in between of 31.81% and 72.37%.
 
-**3. CSU by Country (Bar Chart) (Middle):**
+**3. Top 5 brands by average of profit % (Bar Chart) (Top Right Corner):**
 The bar chart presented here captures the energy usage in CSU by country. New Zealand stands out as the largest consumer, utilizing 16,862 CSU, indicative of its significant energy needs. Conversely, Nigeria occupies the bottom position with a total of 5,043 CSU, while Kenya follows closely behind at 5,126 CSU, illustrating the varying energy consumption patterns across these nations.
 
-**4. KWH by Region (Column Chart) (Top Right Corner):**
-This column chart effectively displays the energy consumption in KWH among the top six regions worldwide. Leading this chart is a region with a staggering total of 163,213 KWH, demonstrating substantial energy requirements. Notably, Australia appears at the lower end of this spectrum, with a usage of 145,825 KWH, indicating its relative energy consumption compared to other regions.
+**4. Top 5 brands by highest number of varites (Donut Chart) (Bottom Right Corner):**
+This donut chart effectively displays the highest number of varites among the top 5 brands. Here like the average of discount % the Brand which topped the list is The Indian Garage Co with  51(22.87%) total number of varites. Notably, at the lower end of this spectrum, comes two brands The Bear House and GAP with the 27(12.11%) number of varites.
 
-**5. KWH by Energy Source (Column Chart) (Top Second Right Corner):**
-In this column chart, the five primary energy sources are analyzed based on their usage in KWH. Wind energy emerges as the most utilized source, with a remarkable consumption of 214,492 KWH, showcasing its growing importance in the energy mix. In contrast, the Geothermal Energy Source represents the smallest share, with a usage of 164,182 KWH, underscoring the need for increased investment in this area.
+**5. Top 5 brands by highest average sales price (Column Chart) (Bottom middle):**
+In this column chart, the five brands are analyzed based on their highest average sales price. where Armani Exchage emerges with the highest average sales price with 6.1K. In contrast, Kingdom of whites the least average sales price among the top 5 with 3.6K.
 
-**6. CSU by Region (Column Chart) (Bottom Second Right Corner):**
-This column chart visually represents the consumption in CSU across the top six regions. South America takes the lead with a notable consumption of 34,692 CSU, while Africa closely follows with 34,444 CSU, reflecting a competitive energy landscape. Meanwhile, North America registers the least consumption among these regions, with a total of 30,732 CSU, indicating differing energy usage patterns.
-
-**7. CSU by Energy Source (Column Chart) (Bottom Right Corner):**
-Here, the column chart categorizes the top five energy sources based on their usage in CSU. Wind energy again stands out, with a considerable consumption of 47,507 CSU, emphasizing its significance in energy generation. Conversely, the Geothermal Energy Source records the lowest usage in this context, with 32,841 CSU, pointing to potential areas for development in sustainable energy practices.
+**6. Bottom 5 brands by average profit% (Pie Chart) (Bottom Left Corner):**
+This pie chart visually represents the bottom 5 brands average profit%. where all of them has the same average profit% of 3.00 (16.67%).
 
 
 **6. Screenshots:**
-See what the dashboard looks like - ![Alt Text](https://github.com/Devi27-create/AWS-SNOWFLAKE-TABLEAU/blob/main/Energy_Consumption_dashboard.png)
+See what the dashboard 1 looks like - ![Alt Text](https://github.com/Devi27-create/Azure-Dataset-Dashboard/blob/main/Insigh%20BI%20Brands.png)
+
+See what the dashboard 2 looks like - ![Alt Text](https://github.com/Devi27-create/Azure-Dataset-Dashboard/blob/main/Insigh%20BI%20Details.png)
 
 
 
