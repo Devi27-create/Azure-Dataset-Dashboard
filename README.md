@@ -1,40 +1,71 @@
-# Microsoft Azure- Microsoft SQL Server Management Studio- PowerBI:
+# Microsoft Azure - Microsoft SQL Server Management Studio - Power BI
 
 **Introduction**
 
-In this project of Insigh BI Solutions Pvt. Ltd., I first focused on data cleaning using Azure SQL. I utilized a few functions to remove inconsistencies, and formatted the data for better analysis. Once the data was thoroughly cleaned and structured, I moved on to the visualization phase using Power BI
+In my project at Insigh BI Solutions Pvt. Ltd., I embarked on a journey of data analysis that began with meticulous data cleaning using Azure SQL. This initial phase was crucial as I aimed to identify and remove inconsistencies while formatting the data for enhanced clarity and readiness for analysis. Once the data was thoroughly refined and structured, I transitioned into the visualization phase, utilizing Power BI to bring the insights to life.
 
-## Microsoft Azure 
+## Microsoft Azure
 
 **Step 1: Creating Database & Loading Data**
 
-To begin the process, I logged into my Azure account to create a database filling the basic details of server,  Database name, Authentication method and password and clicked on review+create and then on create. once deployment is completed then going to resource I then setted up a server firewall via selecting a Public network and IPv4 address and saved the same.
+To kick off the process, I logged into my Azure account, navigating to the database creation interface. After filling in the essential details such as the server name, database name, authentication method, and password, I clicked on the review + create button. Following the creation process, I patiently waited for the deployment to complete. Once it was finished, I accessed the database resource and set up a server firewall, opting for a public network and specifying my IPv4 address to ensure secure access.
 
-After this I opened the Microsoft SQL Server Management Studio and through Database Engine connected the server by providing the User name and Password. Now going back to Azure in Query editor(preview) by providing the same login credentials I used while creating the resource I logged into the Query editor. after this under tables while futher expanding the mentioned data I clicked on the three dots and clicked on the select top 1000 rows with this a query "SELECT TOP (1000) * FROM [dbo].[Men Tshirt]," will get excecuted.
+With the database in place, I opened Microsoft SQL Server Management Studio (SSMS) and connected to the server through the Database Engine, entering the username and password I had set earlier. I then returned to Azure to access the Query Editor (preview), using the same login credentials to establish a connection. To familiarize myself with the data, I expanded the tables and navigated to the relevant dataset. By clicking on the three dots, I selected the option to "Select Top 1000 Rows," which executed the query: 
 
-**Step 2: Data Transformations** 
-After loading the data and gaining a comprehensive understanding of its structure and content, I proceeded to implement some data transformations after finding the impurities in the 'original price' and 'sales price' columns. It appeared that there were unnecessary question marks preceding both prices, which could potentially lead to inaccuracies in data analysis. To resolve this issue, I updated the table to remove the question marks, ensuring that the values in both the 'original price' and 'sales price' columns were clean and properly formatted.
-
-This was accomplished using the following SQL command:
 ```sql
-update [dbo].[Men Tshirt]
-set original_price =trim(replace(cast(original_price as varchar(max)),'?',''))
-where original_price like '%?%'
-
-update [dbo].[Men Tshirt]
-set sale_price =trim(replace(cast(sale_price as varchar(max)),'?',''))
-where sale_price like '%?%'
+SELECT TOP (1000) * FROM [dbo].[Men Tshirt]
 ```
+
+**Step 2: Data Transformations**
+
+After successfully loading the data and immersing myself in its structure and intricacies, I proceeded with essential data transformations. During my examination, I identified impurities within the 'original price' and 'sales price' columns, where unnecessary question marks had been inserted before these values. This inconsistency could lead to potential inaccuracies in subsequent data analysis, so I knew I needed to take corrective action.
+
+To resolve this issue, I executed a series of SQL commands designed to cleanse the data. My aim was to remove the question marks and ensure the values from both the 'original price' and 'sales price' columns were not only accurate but also properly formatted for analysis. The following SQL commands facilitated this transformation:
+
+```sql
+UPDATE [dbo].[Men Tshirt]
+SET original_price = TRIM(REPLACE(CAST(original_price AS varchar(max)), '?', ''))
+WHERE original_price LIKE '%?%'
+
+UPDATE [dbo].[Men Tshirt]
+SET sale_price = TRIM(REPLACE(CAST(sale_price AS varchar(max)), '?', ''))
+WHERE sale_price LIKE '%?%'
+```
+
+By applying these commands, I effectively stripped the 'original price' and 'sales price' columns of any unwanted characters, paving the way for accurate data analysis and meaningful insights.
+
 
 
 ## POWER BI DAX+ Dashboard
 
-Once the data was cleaned, I proceeded to connect the Microsoft Azure Database with Power BI using the get data option and connect it via the server name available in Azure. This process allowed me to create insightful visualizations and reports based on the refined dataset, facilitating deeper analysis and informed decision-making.
+After meticulously cleaning the dataset, I took the next step of connecting the Microsoft Azure Database to Power BI. Utilizing the "Get Data" option, I entered the server name provided by Azure, which enabled me to seamlessly import the refined data into Power BI. This integration laid the groundwork for creating insightful visualizations and comprehensive reports, empowering me to conduct deeper analyses and make informed decisions based on the cleaned dataset.
 
 **POWER BI DAX:**
-By opening the power bi I clicked on the transform data for adding some other columns which I needed to create the dashboard. once the data was visible in the Power BI's Power query I checked for the data types of the available columns and changed the data types of orignal_price and sale_price from text to whole number. later that I Checked fro the NA values and on finding that I cleared the filter from that on all the columns through which I excluded 16 NA records, but other than that because I found other NA values In Original and sales price column where values where avilable I had to add another column to find a fix for this problem. so I created another column and wherever the orignal_price column value was NA and sales_price column values were valid value(a number), I replaced it with 1.5 because we wanted the orignal_price column values to be equal to 50% more than the sale_price column values and for else case I wanted zero to be there in the output so I added that as well.
+Once I opened the data in Power BI, I immediately clicked on the "Transform Data" option to add additional columns necessary for building the dashboard. In the Power Query interface, I began by reviewing the data types of the existing columns. Noticing that both the `original_price` and `sale_price` fields were set as text, I promptly changed their data types to whole numbers to facilitate accurate calculations.
 
-Now that the Factor column got created now I needed to multiply the factor column with sales column to get the values for the NA in Orignial_price column.
+Next, I addressed the presence of NA values in the dataset. I filtered these values from all relevant columns, successfully excluding 16 records. However, I discovered more NA values specifically in the `original_price` and `sale_price` columns that needed to be resolved. To tackle this issue, I created an additional column designed to compensate for the missing data. In this new column, whenever the `original_price` value was NA but the `sale_price` contained a valid number, I replaced the NA with 1.5, reflecting that the original price should be set to 50% above the sale price. For all other scenarios, I ensured that zero was returned as the output.
+
+After successfully creating the Factor column, my next task was to address the missing values in the `original_price` column. To do this, I utilized the Factor column to derive the necessary values by multiplying it with the corresponding `sale_price`. This operation was facilitated by introducing a new conditional column that I designated as the `Sale*Factor` column.
+
+Once I calculated these values, I moved on to create a 'Marked Price' column. This column was designed specifically to replace the Original Price values where they were absent. To ensure data consistency throughout the dataset, I adjusted the data type of the Marked Price column from text to whole number. Finally, I cleansed the dataset by removing any extra and unnecessary columns that were no longer needed, streamlining the data for future analysis.
+
+Having finalized these transformations, I closed the Power Query and applied all changes. With the data now properly structured, I proceeded to implement DAX formulas to incorporate additional analytical columns into my dataset.
+
+To calculate the Discount % column, I employed the following DAX formula: 
+```plaintext
+Discount % = DIVIDE('Men Tshirt'[Marked Price] - 'Men Tshirt'[Sales Price], 'Men Tshirt'[Marked Price]) * 100
+```
+
+For the Profit % column, I utilized this DAX formula:
+```plaintext
+Profit % = RANDBETWEEN(2, 17)
+```
+
+To derive the Cost Price column, I applied the following DAX formula: 
+```plaintext
+Cost Price = DIVIDE(100 * 'Men Tshirt'[Sales Price], 100 + 'Men Tshirt'[Profit %])
+```
+With these calculations in place, I proceeded to dive into the dashboard creation, setting the stage for a robust and interactive data visualization experience.
 
 **Structure and Order:**
 1. Project Title/ Headline
@@ -48,14 +79,13 @@ Now that the Factor column got created now I needed to multiply the factor colum
 
 **2. Short Description:**
 
-Insigh BI Solutions Private Limited Dashboard is a visually engaging analytical Power BI report designed to help the users to explore and compare the different brands insights, the report presents key insights across two distinct pages. The first page highlights the various brands, while the second page provides more detailed breakdowns and visual representations of specific metrics. This approach not only enhances the clarity of the insights but also makes it easier to understand and interpret the findings effectively.
-
+The Insigh BI Solutions Private Limited Dashboard is a captivating analytical report crafted using Power BI, designed to empower users to delve deep into brand comparisons and insights. This report spans two distinct pages, each tailored to different analytical needs. The first page showcases a comprehensive overview of the various brands, Meanwhile, the second page offers an in-depth analysis, featuring detailed breakdowns and visually striking representations of specific metrics. This dual-page layout not only elevates the clarity of insights but also facilitates a more straightforward understanding and interpretation of the data findings, ensuring users can make informed decisions with ease.
 
 **3. Tech Stack:**
 
--**Microsoft Azure+ Microsoft SQL Server Management Studio-** Utilized for robust data storage and management and data loading and cleaning.
--**PowerBI-** The primary data visualization platform used to create the dashboard, offering the interactive features that enhance user engagement and comprehension of the data.
--**File Format-** The dashboard is developed in .pbit format with snapshot visualizations saved as .png files for sharing and reporting purposes. 
+- **Microsoft Azure + Microsoft SQL Server Management Studio:** These powerful tools are utilized for efficient data storage, management, and the essential processes of data loading and cleaning.
+- **Power BI:** This leading data visualization platform serves as the cornerstone for the dashboard, providing interactive features that significantly enhance user engagement and comprehension of complex datasets.
+- **File Format:** The dashboard is professionally developed in the .pbit format, with snapshot visualizations conveniently saved as .png files for streamlined sharing and reporting.
 
 **4. Data Source:**
 Source: https://www.udemy.com/course/complete-data-analyst-bootcamp-from-basics-to-advanced/learn/lecture/50857825#overview
@@ -68,36 +98,35 @@ Source: https://www.udemy.com/course/complete-data-analyst-bootcamp-from-basics-
 
 
 **1. Key Questions:**
-1) What are the highest number of varites in the top 5 brands?
-2) What is the highest average sales price of the top 5 brands?
-3) What is the average of discount % in the top 5 brands?
-4) What is the top 5 brands average profit %?
-5) What is the bottom 5 brands average profit %?
+1) What is the highest number of varieties among the top 5 brands?
+2) What brand records the highest average sales price in the top 5?
+3) What is the average discount percentage across the top 5 brands?
+4) What is the average profit percentage for the top 5 brands?
+5) How does the average profit percentage of the bottom 5 brands compare?
 
 **2. Goal of the Dashboard:**
 
-The primary objective of this dashboard is to provide users with an interactive and intuitive visual tool that simplifies data exploration and analysis. By allowing users to seamlessly navigate through the dataset. The dashboard helps to uncover intricate details regarding the usage patterns of KWH and CSU. This ultimately facilitates informed decision-making and encourages strategic planning for energy management and sustainability efforts.
+The overarching goal of this dashboard is to provide users with an interactive and user-friendly visual tool that simplifies the exploration and analysis of complex datasets. By enabling users to effortlessly navigate through the data, the dashboard uncovers intricate details regarding different brands. This functionality ultimately aids in informed decision-making and promotes strategic planning focused on energy management and sustainability initiatives.
 
 **3. A Walkthrough of Key Visuals:**
 
-**1. Text Box (top):**
-The text box displays the title of the Dashboard, ***Insigh BI Solutions Private Limited***.
+**1. Header Text Box:**  
+Prominently displayed at the top, the text box features the title of the Dashboard, ***Insigh BI Solutions Private Limited***, establishing a clear identity for the report.
 
-**2. Top 5 brands by average of discount % (Bar Chart) (top Left Corner):**
-This visually engaging bar chart illustrates the average of discount % of top 5 brands. Where The Indian Garage Co tops the chart with 72 average of discount %. In contrast, Netplay registers the lowest among the top 5 with 32 average of discount %. However the average of discount % of all the 5 brands lies in between of 31.81% and 72.37%.
+**2. Top 5 Brands by Average Discount Percentage (Bar Chart, Top Left Corner):**  
+This engaging bar chart portrays the average discount percentage for the top 5 brands, with The Indian Garage Co leading the chart at an impressive 72%. In contrast, Netplay holds the lowest position among the top 5 at 32%. The average discount percentage across all five brands ranges between 31.81% and 72.37%, providing a comprehensive view of pricing strategies.
 
-**3. Top 5 brands by average of profit % (Bar Chart) (Top Right Corner):**
-The bar chart presented here captures the energy usage in CSU by country. New Zealand stands out as the largest consumer, utilizing 16,862 CSU, indicative of its significant energy needs. Conversely, Nigeria occupies the bottom position with a total of 5,043 CSU, while Kenya follows closely behind at 5,126 CSU, illustrating the varying energy consumption patterns across these nations.
+**3. Top 5 Brands by Average Profit Percentage (Area Chart, Top Right Corner):**  
+The area chart visualizes the average profit percentages of the top 5 brands, illustrating that Be Active, Valen Clun, and VAN HEUSEN brands top the chart with a average of 17% Profit percentage. While the rest of the brands had 16% average profit percentage. (Note: These data can vary everytime when we open the file as I had choosen random in the DAX for Profit Percentage).
 
-**4. Top 5 brands by highest number of varites (Donut Chart) (Bottom Right Corner):**
-This donut chart effectively displays the highest number of varites among the top 5 brands. Here like the average of discount % the Brand which topped the list is The Indian Garage Co with  51(22.87%) total number of varites. Notably, at the lower end of this spectrum, comes two brands The Bear House and GAP with the 27(12.11%) number of varites.
+**4. Top 5 Brands by Highest Number of Varieties (Donut Chart, Bottom Right Corner):**  
+In this donut chart, the focus shifts to the highest number of varieties offered by the top 5 brands. The Indian Garage Co once again tops the list, boasting an impressive 51 varieties (22.87% of the total). Meanwhile, The Bear House and GAP present the lowest count among the top 5, each offering 27 varieties (12.11%).
 
-**5. Top 5 brands by highest average sales price (Column Chart) (Bottom middle):**
-In this column chart, the five brands are analyzed based on their highest average sales price. where Armani Exchage emerges with the highest average sales price with 6.1K. In contrast, Kingdom of whites the least average sales price among the top 5 with 3.6K.
+**5. Top 5 Brands by Highest Average Sales Price (Ribbon Chart, Bottom Middle):**  
+The ribbon chart analyzes the brands based on their average sales prices, revealing Armani Exchange as the leader with a remarkable average sales price of 6.1K. Conversely, the Kingdom of Whites registers the lowest average sales price among the top 5 at 3.6K, highlighting pricing diversity within the market.
 
-**6. Bottom 5 brands by average profit% (Pie Chart) (Bottom Left Corner):**
-This pie chart visually represents the bottom 5 brands average profit%. where all of them has the same average profit% of 3.00 (16.67%).
-
+**6. Bottom 5 Brands by Average Profit Percentage (Pie Chart, Bottom Left Corner):**  
+Finally, this pie chart visually represents the average profit percentages of the bottom 5 brands. Notably, each of these brands reflects a uniform average profit percentage of 3.00, indicating potential challenges regarding profitability among these lesser-performing brands.(Note: These data can vary everytime when we open the file as I had choosen random in the DAX for Profit Percentage).
 
 **6. Screenshots:**
 See what the dashboard 1 looks like - ![Alt Text](https://github.com/Devi27-create/Azure-Dataset-Dashboard/blob/main/Insigh%20BI%20Brands.png)
